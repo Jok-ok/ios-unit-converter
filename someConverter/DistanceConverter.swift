@@ -29,12 +29,17 @@ class DistanceConverter: ConverterProtocol {
     }
     
     private func checkValue(){
-        if  let maxCelciusValue = max, kilometers > maxCelciusValue {
-            kilometers = maxCelciusValue
-        } else if let minCelciusValue = min, kilometers < minCelciusValue {
-            kilometers = minCelciusValue
+        guard let maxKilometers = max,
+              let minKilometers = min else { return }
+        
+        if kilometers > maxKilometers {
+            kilometers = maxKilometers
+            convertTo(value: kilometers)
+        } else if kilometers < minKilometers {
+            kilometers = minKilometers
+            convertTo(value: kilometers)
         }
-        convertTo(value: kilometers)
+ 
     }
     
     @discardableResult func convertFrom(value: Double) -> Double {
@@ -43,7 +48,7 @@ class DistanceConverter: ConverterProtocol {
         for _ in 0..<precision {
             multiplier = multiplier * 10.0
         }
-        kilometers = (kilometers * 1.60934 * multiplier).rounded() / multiplier
+        kilometers = (milies * 1.60934 * multiplier).rounded() / multiplier
         checkValue()
         return kilometers
     }

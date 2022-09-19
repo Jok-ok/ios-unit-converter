@@ -4,14 +4,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var secondLabel: UILabel!
     
+    @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var firstTextBox: UITextField!
     @IBOutlet weak var secondTextBox: UITextField!
     @IBOutlet weak var modeSegmentedControl: UISegmentedControl!
     
-    var currentConverter: ConverterProtocol = TemperaturConverter(max: 50, min: -80)
-    let distanceConverter = DistanceConverter()
-    
-    private var precision: Int = 3
+    var currentConverter: ConverterProtocol = TemperaturConverter(max: 50, min: -80, precision: 2)
     
     func celsiusToFahrenheit(value: Double) -> Double {
         ((value * (9/5) + 32) * 1000).rounded() / 1000
@@ -21,30 +19,28 @@ class ViewController: UIViewController {
         case temperature
         case distance
     }
-    @IBAction func changeSecondTextBoxSymbol(_ sender: UIButton) {
-        var text = secondTextBox.text ?? ""
+    
+    func changeTextBoxSymbol(textBox: UITextField) {
+        var text = textBox.text ?? ""
         if text.first != "-" {
             text = "-" + text
         }
         else {
             text.removeFirst()
         }
-        secondTextBox.text = text
-        farengDidChanged(secondTextBox)
+        textBox.text = text
+
     }
     
     @IBAction func changeFirstTextBoxSymbol(_ sender: UIButton) {
-        var text = firstTextBox.text ?? ""
-        if text.first != "-" {
-            text = "-" + text
-        }
-        else {
-            text.removeFirst()
-        }
-        firstTextBox.text = text
+        changeTextBoxSymbol(textBox: firstTextBox)
         celcDidChange(firstTextBox)
     }
     
+    @IBAction func changeSecondTextBoxSymbol(_ sender: UIButton) {
+        changeTextBoxSymbol(textBox: secondTextBox)
+        farengDidChanged(secondTextBox)
+    }
     
     private func checkValue(textBox: UITextField) {
         guard let min = currentConverter.min,
@@ -75,29 +71,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func farengDidChanged(_ sender: UITextField) {
-        if var celc = Double(sender.text ?? "") {
-            if celc <= -112{
-                sender.text = "-112"
-                celc = -112
-                firstTextBox.text = String((((celc - 32) * (5/9)) * 1000).rounded()/1000)
-                return
-            }
-            else if celc >= 122 {
-                sender.text = "122"
-                celc = 122
-                firstTextBox.text = String((celc - 32) * (5/9))
-                return
-            }
-            firstTextBox.text = String((((celc - 32) * (5/9)) * 1000).rounded()/1000)
-        }
-        else {
+        checkValue(textBox: sender)
+        
+        guard let value = Double(sender.text ?? ""), value != 0 else {
+            sender.text = ""
             firstTextBox.text = ""
+            return
         }
-        if let celc = Double(sender.text ?? "") {
-            firstTextBox.text = String((((celc - 32) * (5/9)) * 1000).rounded()/1000)
-        } else {
-            firstTextBox.text = ""
-        }
+        
+        firstTextBox.text = String(currentConverter.convertFrom(value: value))
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,13 +111,13 @@ class ViewController: UIViewController {
         case "Температура":
             firstLabel.text = "Цельсия"
             secondLabel.text = "Фаренгейты"
-            currentConverter = TemperaturConverter(max: 50, min: -80)
+            currentConverter = TemperaturConverter(max: 50, min: -80, precision: 2)
             firstTextBox.text = ""
             secondTextBox.text = ""
         case "Расстояние":
             firstLabel.text = "Киллометры"
             secondLabel.text = "Мили"
-            currentConverter =  DistanceConverter()
+            currentConverter =  DistanceConverter(precision: 2)
             firstTextBox.text = ""
             secondTextBox.text = ""
         case .none:

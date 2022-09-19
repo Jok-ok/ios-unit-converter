@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ida-YD-Jx8">
-                                <rect key="frame" x="57.5" y="355.5" width="299" height="243"/>
+                                <rect key="frame" x="57.5" y="218" width="299" height="243"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q3E-G6-09A">
                                         <rect key="frame" x="0.0" y="0.0" width="299" height="48"/>
@@ -95,6 +95,7 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="diH-n7-6WV">
                                 <rect key="frame" x="57" y="127" width="300" height="32"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="Hbe-wi-MTD"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="yVI-PR-eah"/>
                                 </constraints>
                                 <segments>
@@ -112,7 +113,7 @@
                             <constraint firstItem="Ida-YD-Jx8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Ctv-Zi-acM"/>
                             <constraint firstItem="diH-n7-6WV" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="NGq-OT-xp3"/>
                             <constraint firstItem="diH-n7-6WV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="35" id="YXj-Qa-T6h"/>
-                            <constraint firstItem="Ida-YD-Jx8" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="e1E-ge-DGd"/>
+                            <constraint firstItem="Ida-YD-Jx8" firstAttribute="top" secondItem="diH-n7-6WV" secondAttribute="bottom" constant="60" id="lVt-nY-udE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GLM-T8-9ui"/>
@@ -122,6 +123,7 @@
                         <outlet property="modeSegmentedControl" destination="diH-n7-6WV" id="4bY-ao-h3w"/>
                         <outlet property="secondLabel" destination="JkM-EB-nxz" id="F8d-QY-CPn"/>
                         <outlet property="secondTextBox" destination="Tai-05-bSg" id="72Z-oC-p0L"/>
+                        <outlet property="stackView" destination="Ida-YD-Jx8" id="0Hs-UB-Ayg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

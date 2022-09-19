@@ -29,16 +29,19 @@ class TemperaturConverter: ConverterProtocol {
     }
     
     private func checkValue(){
-        if  let maxCelciusValue = max, celcius > maxCelciusValue {
+        guard let maxCelciusValue = max,
+              let minCelciusValue = min else { return }
+        
+        if celcius > maxCelciusValue {
             celcius = maxCelciusValue
-        } else if let minCelciusValue = min, celcius < minCelciusValue {
+            convertTo(value: celcius)
+        } else if celcius < minCelciusValue {
             celcius = minCelciusValue
+            convertTo(value: celcius)
         }
-        convertTo(value: celcius)
     }
     
-    @discardableResult func convertFrom(value: Double) -> Double {
-        farenheit = value
+    func convertFrom(value: Double) -> Double {
         var multiplier: Double = 10.0
         for _ in 0..<precision {
             multiplier = multiplier * 10.0
