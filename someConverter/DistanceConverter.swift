@@ -17,7 +17,7 @@ class DistanceConverter: ConverterProtocol {
         self.precision = precision
     }
     
-    func convertTo(value: Double) -> Double {
+    @discardableResult func convertTo(value: Double) -> Double {
         kilometers = value
         var multiplier: Double = 10.0
         for _ in 0..<precision {
@@ -31,14 +31,13 @@ class DistanceConverter: ConverterProtocol {
     private func checkValue(){
         if  let maxCelciusValue = max, kilometers > maxCelciusValue {
             kilometers = maxCelciusValue
-            convertTo(value: kilometers)
         } else if let minCelciusValue = min, kilometers < minCelciusValue {
             kilometers = minCelciusValue
-            convertTo(value: kilometers)
         }
+        convertTo(value: kilometers)
     }
     
-    func convertFrom(value: Double) -> Double {
+    @discardableResult func convertFrom(value: Double) -> Double {
         milies = value
         var multiplier: Double = 10.0
         for _ in 0..<precision {

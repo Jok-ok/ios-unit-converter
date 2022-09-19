@@ -17,7 +17,7 @@ class TemperaturConverter: ConverterProtocol {
         self.precision = precision
     }
     
-    func convertTo(value: Double) -> Double {
+    @discardableResult func convertTo(value: Double) -> Double {
         celcius = value
         var multiplier: Double = 10.0
         for _ in 0..<precision {
@@ -31,14 +31,13 @@ class TemperaturConverter: ConverterProtocol {
     private func checkValue(){
         if  let maxCelciusValue = max, celcius > maxCelciusValue {
             celcius = maxCelciusValue
-            convertTo(value: celcius)
         } else if let minCelciusValue = min, celcius < minCelciusValue {
             celcius = minCelciusValue
-            convertTo(value: celcius)
         }
+        convertTo(value: celcius)
     }
     
-    func convertFrom(value: Double) -> Double {
+    @discardableResult func convertFrom(value: Double) -> Double {
         farenheit = value
         var multiplier: Double = 10.0
         for _ in 0..<precision {
