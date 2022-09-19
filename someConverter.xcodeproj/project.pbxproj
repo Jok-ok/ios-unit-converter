@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA3926BC28D8DC0F000737D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB79BCA28C7702C00EC12B4 /* ViewController.swift */; };
+		FA73A53F28D74A8A00A57323 /* TemperaturConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73A53E28D74A8A00A57323 /* TemperaturConverter.swift */; };
+		FA73A54128D74ACC00A57323 /* ConverterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73A54028D74ACC00A57323 /* ConverterProtocol.swift */; };
+		FA73A54328D76FD100A57323 /* DistanceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73A54228D76FD100A57323 /* DistanceConverter.swift */; };
 		FAB79BC728C7702C00EC12B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB79BC628C7702C00EC12B4 /* AppDelegate.swift */; };
 		FAB79BC928C7702C00EC12B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB79BC828C7702C00EC12B4 /* SceneDelegate.swift */; };
 		FAB79BCB28C7702C00EC12B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB79BCA28C7702C00EC12B4 /* ViewController.swift */; };
@@ -37,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA73A53E28D74A8A00A57323 /* TemperaturConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperaturConverter.swift; sourceTree = "<group>"; };
+		FA73A54028D74ACC00A57323 /* ConverterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterProtocol.swift; sourceTree = "<group>"; };
+		FA73A54228D76FD100A57323 /* DistanceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceConverter.swift; sourceTree = "<group>"; };
 		FAB79BC328C7702C00EC12B4 /* someConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = someConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB79BC628C7702C00EC12B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAB79BC828C7702C00EC12B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +116,9 @@
 				FAB79BD428C7702E00EC12B4 /* LaunchScreen.storyboard */,
 				FAB79BD728C7702E00EC12B4 /* Info.plist */,
 				FAB79BCF28C7702C00EC12B4 /* someConverter.xcdatamodeld */,
+				FA73A53E28D74A8A00A57323 /* TemperaturConverter.swift */,
+				FA73A54228D76FD100A57323 /* DistanceConverter.swift */,
+				FA73A54028D74ACC00A57323 /* ConverterProtocol.swift */,
 			);
 			path = someConverter;
 			sourceTree = "<group>";
@@ -261,7 +271,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA73A54328D76FD100A57323 /* DistanceConverter.swift in Sources */,
+				FA73A54128D74ACC00A57323 /* ConverterProtocol.swift in Sources */,
 				FAB79BCB28C7702C00EC12B4 /* ViewController.swift in Sources */,
+				FA73A53F28D74A8A00A57323 /* TemperaturConverter.swift in Sources */,
 				FAB79BC728C7702C00EC12B4 /* AppDelegate.swift in Sources */,
 				FAB79BD128C7702C00EC12B4 /* someConverter.xcdatamodeld in Sources */,
 				FAB79BC928C7702C00EC12B4 /* SceneDelegate.swift in Sources */,
@@ -280,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA3926BC28D8DC0F000737D4 /* ViewController.swift in Sources */,
 				FAB79BEB28C7702E00EC12B4 /* someConverterUITests.swift in Sources */,
 				FAB79BED28C7702E00EC12B4 /* someConverterUITestsLaunchTests.swift in Sources */,
 			);

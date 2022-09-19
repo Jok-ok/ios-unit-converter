@@ -8,6 +8,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var secondTextBox: UITextField!
     @IBOutlet weak var modeSegmentedControl: UISegmentedControl!
     
+    var currentConverter: ConverterProtocol = TemperaturConverter(max: 50, min: -80)
+    let distanceConverter = DistanceConverter()
+    
+    private var precision: Int = 3
+    
     func celsiusToFahrenheit(value: Double) -> Double {
         ((value * (9/5) + 32) * 1000).rounded() / 1000
     }
@@ -16,26 +21,57 @@ class ViewController: UIViewController {
         case temperature
         case distance
     }
-    
-    @IBAction func celcDidChange(_ sender: UITextField) {
-        if var celc = Double(sender.text ?? "") {
-            if celc <= -80  {
-                sender.text = "-80"
-                celc = -80
-                secondTextBox.text = String(((celc * (9/5) + 32) * 1000).rounded() / 1000)
-                return
-            }
-            else if celc >= 50 {
-                sender.text = "50"
-                celc = 50
-                secondTextBox.text = String(((celc * (9/5) + 32) * 1000).rounded() / 1000)
-                return
-            }
-            secondTextBox.text = String(((celc * (9/5) + 32) * 1000).rounded() / 1000)
+    @IBAction func changeSecondTextBoxSymbol(_ sender: UIButton) {
+        var text = secondTextBox.text ?? ""
+        if text.first != "-" {
+            text = "-" + text
         }
         else {
-            secondTextBox.text = ""
+            text.removeFirst()
         }
+        secondTextBox.text = text
+        farengDidChanged(secondTextBox)
+    }
+    
+    @IBAction func changeFirstTextBoxSymbol(_ sender: UIButton) {
+        var text = firstTextBox.text ?? ""
+        if text.first != "-" {
+            text = "-" + text
+        }
+        else {
+            text.removeFirst()
+        }
+        firstTextBox.text = text
+        celcDidChange(firstTextBox)
+    }
+    
+    
+    private func checkValue(textBox: UITextField) {
+        guard let min = currentConverter.min,
+              let max = currentConverter.max else { return }
+        
+        if var value = Double(textBox.text ?? "") {
+            if value <= min {
+                textBox.text = String(Int(min))
+                value = min
+            }
+            else if value >= max {
+                textBox.text = String(Int(max))
+                value = max
+            }
+        }
+    }
+    
+    @IBAction func celcDidChange(_ sender: UITextField) {
+        checkValue(textBox: sender)
+        
+        guard let value = Double(sender.text ?? ""), value != 0 else {
+            sender.text = ""
+            secondTextBox.text = ""
+            return
+        }
+        
+        secondTextBox.text = String(currentConverter.convertTo(value: value))
     }
     
     @IBAction func farengDidChanged(_ sender: UITextField) {
@@ -64,9 +100,27 @@ class ViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        modeSegmentedControl.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16, weight: .bold)], for: .normal)
+        title = "КОНВЕРТЕР"
+        navigationController?.navigationBar.prefersLargeTitles = false
+
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(named: "AccentColor")
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 30, weight: .bold)]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        modeSegmentedControl.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16, weight: .bold)], for: .normal)
     }
     
     @IBAction func onModeChanged(_ sender: UISegmentedControl) {
@@ -74,9 +128,15 @@ class ViewController: UIViewController {
         case "Температура":
             firstLabel.text = "Цельсия"
             secondLabel.text = "Фаренгейты"
+            currentConverter = TemperaturConverter(max: 50, min: -80)
+            firstTextBox.text = ""
+            secondTextBox.text = ""
         case "Расстояние":
             firstLabel.text = "Киллометры"
             secondLabel.text = "Мили"
+            currentConverter =  DistanceConverter()
+            firstTextBox.text = ""
+            secondTextBox.text = ""
         case .none:
             break
         case .some(_):
