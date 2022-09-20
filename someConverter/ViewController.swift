@@ -58,6 +58,11 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func onInfoButtonTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "Об авторах", message: "Дизайн by Васильев Д.Е.\n Разработано by Воробей А.И.\nПрезентовано by Белоусов С.А.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Невероятные парни!", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     @IBAction func celcDidChange(_ sender: UITextField) {
         checkValue(textBox: sender)
         
@@ -115,7 +120,7 @@ class ViewController: UIViewController {
             firstTextBox.text = ""
             secondTextBox.text = ""
         case "Расстояние":
-            firstLabel.text = "Киллометры"
+            firstLabel.text = "Километры"
             secondLabel.text = "Мили"
             currentConverter =  DistanceConverter(precision: 2)
             firstTextBox.text = ""

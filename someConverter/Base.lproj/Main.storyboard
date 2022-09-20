@@ -106,14 +106,24 @@
                                     <action selector="onModeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="5Zp-17-sCa"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9FM-cb-own">
+                                <rect key="frame" x="344" y="828" width="50" height="34"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="info.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="onInfoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vkj-y4-eq7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Ida-YD-Jx8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Ctv-Zi-acM"/>
                             <constraint firstItem="diH-n7-6WV" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="NGq-OT-xp3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9FM-cb-own" secondAttribute="trailing" constant="20" id="VKg-B1-oqP"/>
                             <constraint firstItem="diH-n7-6WV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="35" id="YXj-Qa-T6h"/>
                             <constraint firstItem="Ida-YD-Jx8" firstAttribute="top" secondItem="diH-n7-6WV" secondAttribute="bottom" constant="60" id="lVt-nY-udE"/>
+                            <constraint firstItem="9FM-cb-own" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="r82-4F-1W7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GLM-T8-9ui"/>
@@ -153,6 +163,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="info.circle" catalog="system" width="128" height="123"/>
         <image name="plus.forwardslash.minus" catalog="system" width="128" height="115"/>
         <namedColor name="AccentColor">
             <color red="0.94499999284744263" green="0.62699997425079346" blue="0.27099999785423279" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
